@@ -12,7 +12,6 @@ public enum AssignmentType{
 }
 
 
-[CreateAssetMenu(menuName = "Progress System/Assignment")]
 public class Assignment
 {
     public AssignmentType whatKind;

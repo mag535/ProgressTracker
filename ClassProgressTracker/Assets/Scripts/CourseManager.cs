@@ -36,11 +36,7 @@ public class CourseManager : Singleton<CourseManager>
             Debug.Log("Course already exists");
             return;
         }else{
-            // create new course scriptable object
-            CourseData newCourse = ScriptableObject.CreateInstance<CourseData>();
-            newCourse.title = evtData.title;
-            newCourse.description = evtData.description;
-
+            // FIXME: create and save new course object
             // FIXME: display message on create notification window
             Debug.Log("Course " + evtData.title + " has been added.");
         }

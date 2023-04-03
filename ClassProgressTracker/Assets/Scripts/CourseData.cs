@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Progress System/Course")]
-public class CourseData : ScriptableObject
+public class CourseData
 {
     public string title;
     public string description;

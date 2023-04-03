@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/_preload.unity
+    guid: b3d2686dc9533784084e5562838fe149
+  - enabled: 1
+    path: Assets/Scenes/HomeScreen.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/AddCourseScreen.unity
+    guid: d122c4ca9e5dfe44cafb6be609b60a5b
   m_configObjects: {}

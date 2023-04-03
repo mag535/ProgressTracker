@@ -10,6 +10,10 @@ public class ExampleTrigger : EvtSystem.Event
     public float data2;
 }
 
+public class ConfirmInformation : EvtSystem.Event
+{
+}
+
 public class AddCourseTrigger : EvtSystem.Event
 {
     public string title;

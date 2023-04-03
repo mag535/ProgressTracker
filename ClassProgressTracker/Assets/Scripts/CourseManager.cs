@@ -32,10 +32,17 @@ public class CourseManager : Singleton<CourseManager>
         List<string> courseDatabaseTitles = new List<string>(courseDatabase.Keys);
         // Check if course already exists
         if (courseDatabaseTitles.Contains(evtData.title)){
+            // FIXME: display message on create error window
             Debug.Log("Course already exists");
             return;
         }else{
-            Debug.Log("All good");
+            // create new course scriptable object
+            CourseData newCourse = ScriptableObject.CreateInstance<CourseData>();
+            newCourse.title = evtData.title;
+            newCourse.description = evtData.description;
+
+            // FIXME: display message on create notification window
+            Debug.Log("Course " + evtData.title + " has been added.");
         }
 
         return;

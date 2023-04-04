@@ -12,6 +12,7 @@ public enum AssignmentType{
 }
 
 
+[SerializeField]
 public class Assignment
 {
     public AssignmentType whatKind;

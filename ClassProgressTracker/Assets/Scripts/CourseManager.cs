@@ -21,11 +21,10 @@ public class CourseManager : Singleton<CourseManager>
 
     public void LoadDatabase()
     {
-        foreach(CourseData course in database.list){
-            courseDatabase.Add(course.title, course);
-        }
+        Debug.Log("FIXME: LoadDatabase()");
     }
 
+    // Keep track of all courses by adding new one to internal dictionary
     public void AddCourse(AddCourseTrigger evtData)
     {
         // create a list of the keys
@@ -38,15 +37,17 @@ public class CourseManager : Singleton<CourseManager>
         }else{
             // FIXME: create and save new course object
             // FIXME: display message on create notification window
-            Debug.Log("Course " + evtData.title + " has been added.");
+            Debug.Log("FIXME: AddCourse()");
         }
 
         return;
     }
 
+    // FIXME: Keep track of all courses by updating internal dictionary to reflect current courses
     public void RemoveCourse(RemoveCourseTrigger evtData)
     {
         // FIXME: check if course exists, then delete scriptable object and all assignments associated with it
+        Debug.Log("FIXME: RemoveCourse");
         return;
     }
 }

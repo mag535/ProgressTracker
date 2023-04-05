@@ -9,6 +9,8 @@ public class CourseData
     public string title;
     public string description;
 
+    public float grade;
+
     // NOTE: this will save as a list of assignment names in the JSON file
     public List<string> assignmentList;
 }

@@ -33,6 +33,14 @@ public class CourseManager : Singleton<CourseManager>
         });
     }
 
+    public CourseData GetCourse(string title)
+    {
+        if (!courseDatabaseTitles.Contains(title)){
+            return null;
+        }
+        return courseDatabase[title];
+    }
+
     // Keep track of all courses by adding new one to internal dictionary
     public void AddCourse(AddCourseTrigger evtData)
     {

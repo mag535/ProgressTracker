@@ -21,7 +21,16 @@ public class CourseManager : Singleton<CourseManager>
 
     public void LoadDatabase()
     {
-        Debug.Log("FIXME: LoadDatabase()");
+        List<CourseData> loadedDatabase = DataManager.Instance.LoadCourseData();
+        // save to internal dictionary
+        foreach (CourseData data in loadedDatabase){
+            courseDatabase.Add(data.title, data);
+        }
+
+        // Tell UIManager to refresh course list on screen
+        EvtSystem.EventDispatcher.Raise<RefreshCourseListTrigger>(new RefreshCourseListTrigger {
+            database = courseDatabase
+        });
     }
 
     // Keep track of all courses by adding new one to internal dictionary

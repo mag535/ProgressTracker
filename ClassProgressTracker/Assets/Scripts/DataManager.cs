@@ -56,9 +56,27 @@ public class DataManager : Singleton<DataManager>
     }
 
     // FIXME: Finds JSON file of given name and creates new instance of CourseData to add to CourseManager
-    public void LoadCourseData()
+    public List<CourseData> LoadCourseData()
     {
-        return;
+        List<CourseData> loadedData = new List<CourseData>();
+        FileInfo[] filenames;
+
+        // get list of JSON filenames in CoourseDataDirectory
+        DirectoryInfo source = new DirectoryInfo(courseDataDirectory);
+        filenames = source.GetFiles();
+
+        // loop through file list
+        foreach (FileInfo file in filenames){
+            // read JSON files
+            StreamReader reader = new StreamReader(file.FullName);
+            string json = reader.ReadToEnd();
+            // load each JSON data into program as CourseData object
+            CourseData existing = JsonUtility.FromJson<CourseData>(json);
+            loadedData.Add(existing);
+        }
+
+        // return list of CourseData objects
+        return loadedData;
     }
 
     // FIXME: Takes changed info of course and overwrites respective JSON file

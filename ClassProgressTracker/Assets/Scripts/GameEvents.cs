@@ -25,3 +25,8 @@ public class RemoveCourseTrigger : EvtSystem.Event
     public string title;
     public string description;
 }
+
+public class RefreshCourseListTrigger : EvtSystem.Event
+{
+    public Dictionary<string, CourseData> database;
+}

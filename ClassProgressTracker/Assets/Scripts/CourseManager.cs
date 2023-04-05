@@ -5,8 +5,6 @@ using EvtSystem;
 
 public class CourseManager : Singleton<CourseManager>
 {
-    public CourseDatabase database;
-
     public Dictionary<string, CourseData> courseDatabase = new Dictionary<string, CourseData>();
 
 
@@ -35,9 +33,15 @@ public class CourseManager : Singleton<CourseManager>
             Debug.Log("Course already exists");
             return;
         }else{
-            // FIXME: create and save new course object
             // FIXME: display message on create notification window
-            Debug.Log("FIXME: AddCourse()");
+            Debug.Log(evtData.title + " has been added.");
+            // create new CourseData
+            CourseData c = new CourseData();
+            c.title = evtData.title;
+            c.description = evtData.description;
+
+            // add new course to internal dictionary
+            courseDatabase.Add(c.title, c);
         }
 
         return;

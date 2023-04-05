@@ -5,23 +5,32 @@ using System.IO;
 
 public class DataManager : Singleton<DataManager>
 {
-    private string path = "Assets/_CourseData";
+    private string saveFileExtension = ".json";
+
     // Start is called before the first frame update
     void Start()
     {
         // FIXME: add listeners for saving and loading course and assignment data
-        EvtSystem.EventDispatcher.AddListener<SaveCourse>(SaveCourseData);
+        EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(SaveNewCourse);
     }
 
 
-    #region CourseDataFunctions
+    #region CourseData Functions
 
     // FIXME: Takes new info for course and saves to JSON file.
-    public void SaveCourseData(SaveCourse evtData)
+    public void SaveNewCourse(AddCourseTrigger evtData)
     {
-        // convert CourseData to JSON string
-        string json = JsonUtility.ToJson(evtData.newCourse);
-        // FIXME: write contents of JSON to text file
+        Debug.Log("saving file...");
+        // convert CourseData object to JSON string
+        string json = JsonUtility.ToJson(new CourseData {
+            title = evtData.title,
+            description = evtData.description
+        });
+        // Write contents of JSON string to plaintext file
+        string path = Application.persistentDataPath + "/" + evtData.title + saveFileExtension;
+        StreamWriter writer = new StreamWriter(path, true);
+        writer.WriteLine(json);
+        writer.Close();
         return;
     }
 

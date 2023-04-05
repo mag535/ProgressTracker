@@ -25,8 +25,3 @@ public class RemoveCourseTrigger : EvtSystem.Event
     public string title;
     public string description;
 }
-
-public class SaveCourse : EvtSystem.Event
-{
-    public CourseData newCourse;
-}

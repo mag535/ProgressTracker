@@ -10,7 +10,6 @@ public class ButtonFunctionManager : Singleton<ButtonFunctionManager>
     // Signal for course info to be used
     public void ConfirmCourseInfo()
     {
-        Debug.Log("button pressed");
         ConfirmInformation confirmed = new ConfirmInformation();
 
         EvtSystem.EventDispatcher.Raise<ConfirmInformation>(confirmed);

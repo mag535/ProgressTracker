@@ -7,6 +7,8 @@ public class CourseManager : Singleton<CourseManager>
 {
     public Dictionary<string, CourseData> courseDatabase = new Dictionary<string, CourseData>();
 
+    private List<string> courseDatabaseTitles = new List<string>();
+
 
     public void Start()
     {
@@ -25,8 +27,6 @@ public class CourseManager : Singleton<CourseManager>
     // Keep track of all courses by adding new one to internal dictionary
     public void AddCourse(AddCourseTrigger evtData)
     {
-        // create a list of the keys
-        List<string> courseDatabaseTitles = new List<string>(courseDatabase.Keys);
         // Check if course already exists
         if (courseDatabaseTitles.Contains(evtData.title)){
             // FIXME: display message on create error window
@@ -40,8 +40,11 @@ public class CourseManager : Singleton<CourseManager>
             c.title = evtData.title;
             c.description = evtData.description;
 
-            // add new course to internal dictionary
+            // Track course by adding it to internal dictionary & titles list
             courseDatabase.Add(c.title, c);
+            courseDatabaseTitles.Add(c.title);
+
+            // FIXME: update course list display on home screen
         }
 
         return;

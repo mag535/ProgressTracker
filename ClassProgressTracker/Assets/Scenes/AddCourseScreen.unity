@@ -627,8 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33c01529f70130046b4b198610ec6a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  courseTitleInput: {fileID: 775020076}
-  courseDescriptionInput: {fileID: 1417413179}
+  courseTitleInput: {fileID: 950330223}
+  courseDescriptionInput: {fileID: 1675120009}
 --- !u!1 &430114347
 GameObject:
   m_ObjectHideFlags: 0
@@ -1402,7 +1402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4d6827b0ca331458ce5c81ead9372e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  database: {fileID: 11400000, guid: 737f5569fd238264788b57beb47abd51, type: 2}
 --- !u!4 &1097529610
 Transform:
   m_ObjectHideFlags: 0

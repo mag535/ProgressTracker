@@ -5,11 +5,25 @@ using System.IO;
 
 public class DataManager : Singleton<DataManager>
 {
-    private string saveFileExtension = ".json";
+    private string saveFileExtension;
+    private string courseDataDirectory;
+    private string assignmentDataDirectory;
 
     // Start is called before the first frame update
     void Start()
     {
+        saveFileExtension = ".json";
+        courseDataDirectory = Application.persistentDataPath + "/Courses/";
+        assignmentDataDirectory = Application.persistentDataPath + "/Assignments/";
+
+        // create directory for CourseData saves
+        if (!Directory.Exists(courseDataDirectory)){
+            Directory.CreateDirectory(courseDataDirectory);
+        }
+        if (!Directory.Exists(assignmentDataDirectory)){
+            Directory.CreateDirectory(assignmentDataDirectory);
+        }
+
         // FIXME: add listeners for saving and loading course and assignment data
         EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(SaveNewCourse);
     }
@@ -26,11 +40,18 @@ public class DataManager : Singleton<DataManager>
             title = evtData.title,
             description = evtData.description
         });
+
         // Write contents of JSON string to plaintext file
-        string path = Application.persistentDataPath + "/" + evtData.title + saveFileExtension;
+        string path = courseDataDirectory + evtData.title + saveFileExtension;
         StreamWriter writer = new StreamWriter(path, true);
         writer.WriteLine(json);
         writer.Close();
+        return;
+    }
+
+    // FIXME: Finds JSON file of given name and deletes it
+    public void DeleteCourseData()
+    {
         return;
     }
 
@@ -52,6 +73,12 @@ public class DataManager : Singleton<DataManager>
 
     // FIXME: takes new info for assignment and saves to JSON file
     public void SaveAssignmentData()
+    {
+        return;
+    }
+
+    // FIXME: finds JSON file of given name and deletes it
+    public void DeleteAssignmentData()
     {
         return;
     }

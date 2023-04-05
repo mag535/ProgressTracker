@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class CourseInformation : MonoBehaviour
 {
-    public TMPro.TextMeshProUGUI courseTitleInput;
-    public TMPro.TextMeshProUGUI courseDescriptionInput;
+    public TMP_InputField courseTitleInput;
+    public TMP_InputField courseDescriptionInput;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +17,7 @@ public class CourseInformation : MonoBehaviour
     public void SendCourseInfo(ConfirmInformation evtData)
     {
         // Only send confirmation flag if title was specified
-        if (courseTitleInput.Equals("")){
+        if (courseTitleInput.text.Equals("")){
             Debug.Log("ERROR -- add a title.");
             return;
         }

@@ -15,4 +15,13 @@ public class ButtonFunctionManager : Singleton<ButtonFunctionManager>
         EvtSystem.EventDispatcher.Raise<ConfirmInformation>(confirmed);
         return;
     }
+
+    public void ConfirmDeletion()
+    {
+        Debug.Log("button pressed");
+        EvtSystem.EventDispatcher.Raise<RemoveCourseTrigger>(new RemoveCourseTrigger {
+            title = "Test2"
+        });
+        return;
+    }
 }

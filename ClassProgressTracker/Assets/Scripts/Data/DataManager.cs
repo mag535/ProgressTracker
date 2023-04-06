@@ -16,7 +16,7 @@ public class DataManager : Singleton<DataManager>
         courseDataDirectory = Application.persistentDataPath + "/Courses/";
         assignmentDataDirectory = Application.persistentDataPath + "/Assignments/";
 
-        // create directory for CourseData saves
+        // create directory for save data
         if (!Directory.Exists(courseDataDirectory)){
             Directory.CreateDirectory(courseDataDirectory);
         }
@@ -24,8 +24,12 @@ public class DataManager : Singleton<DataManager>
             Directory.CreateDirectory(assignmentDataDirectory);
         }
 
-        // FIXME: add listeners for saving and loading course and assignment data
+        // ADDME: listeners for saving and loading course and assignment data
         EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(SaveNewCourse);
+        EvtSystem.EventDispatcher.AddListener<RemoveCourseTrigger>(DeleteCourseData);
+
+        // Load data on startup
+        LoadCourseData();
     }
 
 
@@ -50,13 +54,21 @@ public class DataManager : Singleton<DataManager>
     }
 
     // FIXME: Finds JSON file of given name and deletes it
-    public void DeleteCourseData()
+    public void DeleteCourseData(RemoveCourseTrigger evtData)
     {
+        Debug.Log("deleting data");
+        /*
+        DirectoryInfo source = new DirectoryInfo(courseDataDirectory);
+        // find data file in CourseDataDirectory
+        if (source.GetFiles(evtData.title + saveFileExtension) != null){
+            //
+        }
+        */
         return;
     }
 
-    // FIXME: Finds JSON file of given name and creates new instance of CourseData to add to CourseManager
-    public List<CourseData> LoadCourseData()
+    // Finds JSON file of given name and creates new instance of CourseData to add to CourseManager
+    public void LoadCourseData()
     {
         List<CourseData> loadedData = new List<CourseData>();
         FileInfo[] filenames;
@@ -75,8 +87,11 @@ public class DataManager : Singleton<DataManager>
             loadedData.Add(existing);
         }
 
-        // return list of CourseData objects
-        return loadedData;
+        // FIXME: send list of CourseData objects
+        EvtSystem.EventDispatcher.Raise<LoadDataTrigger>(new LoadDataTrigger {
+            data = loadedData
+        });
+        return;
     }
 
     // FIXME: Takes changed info of course and overwrites respective JSON file

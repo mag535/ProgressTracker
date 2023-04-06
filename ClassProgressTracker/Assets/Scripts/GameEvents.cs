@@ -23,7 +23,11 @@ public class AddCourseTrigger : EvtSystem.Event
 public class RemoveCourseTrigger : EvtSystem.Event
 {
     public string title;
-    public string description;
+}
+
+public class LoadDataTrigger : EvtSystem.Event
+{
+    public List<CourseData> data;
 }
 
 public class RefreshCourseListTrigger : EvtSystem.Event

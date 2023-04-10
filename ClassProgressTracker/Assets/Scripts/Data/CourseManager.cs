@@ -18,6 +18,7 @@ public class CourseManager : Singleton<CourseManager>
     }
 
 
+    // FIXME: won't call, can't figure out why
     public void LoadDatabase(LoadDataTrigger evtData)
     {
         Debug.Log("this function was used");
@@ -29,7 +30,10 @@ public class CourseManager : Singleton<CourseManager>
             courseTitleDatabase.Add(data.title);
         }
 
-        // ADDME: UI implementation to refresh onscreen course list
+        // UI implementation to refresh onscreen course list
+        EvtSystem.EventDispatcher.Raise<RefreshCourseListTrigger>(new RefreshCourseListTrigger {
+            database = courseDatabase
+        });
     }
 
     // Keep track of all courses by adding new one to internal dictionary
@@ -49,6 +53,8 @@ public class CourseManager : Singleton<CourseManager>
         CourseData c = new CourseData();
         c.title = evtData.title;
         c.description = evtData.description;
+        c.grade = 0.0f;
+        c.assignmentList = new List<string>();
 
         // Track course by adding it to internal dictionary & titles list
         courseDatabase.Add(c.title, c);

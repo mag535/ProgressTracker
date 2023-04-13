@@ -9,19 +9,25 @@ public class CourseManager : Singleton<CourseManager>
 
     private List<string> courseTitleDatabase = new List<string>();
 
+    private bool ready;
 
-    public void Start()
+
+    void Awake()
     {
         EvtSystem.EventDispatcher.AddListener<LoadDataTrigger>(LoadDatabase);
         EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(AddCourse);
         EvtSystem.EventDispatcher.AddListener<RemoveCourseTrigger>(RemoveCourse);
     }
 
+    void Start()
+    {
+        //
+    }
+
 
     // FIXME: won't call, can't figure out why
     public void LoadDatabase(LoadDataTrigger evtData)
     {
-        Debug.Log("this function was used");
         List<CourseData> loadedDatabase = evtData.data;
 
         // save to internal dictionary

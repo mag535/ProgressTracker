@@ -17,14 +17,20 @@ public class UISystem : Singleton<UISystem>
     private List<GameObject> activeCourseButtons;
     private List<GameObject> activeActionButtons;
 
+    private List<string> onScreenCourses;
+
+
+    void Awake()
+    {
+        EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(CreateCourseButton);
+        EvtSystem.EventDispatcher.AddListener<RefreshCourseListTrigger>(RefreshCourseList);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         activeCourseButtons = new List<GameObject>();
         activeActionButtons = new List<GameObject>();
-
-        EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(CreateCourseButton);
-        EvtSystem.EventDispatcher.AddListener<RefreshCourseListTrigger>(RefreshCourseList);
     }
 
     // FIXME: creates action button and adds functionality to it
@@ -61,7 +67,9 @@ public class UISystem : Singleton<UISystem>
     // FIXME: Updates button list for exisitng courses on-screen
     public void RefreshCourseList(RefreshCourseListTrigger evtData)
     {
-        Debug.Log("signal received");
+        foreach (string title in evtData.database.Keys){
+            // FIXME: check if course is already on screen
+        }
         return;
     }
 

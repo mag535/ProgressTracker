@@ -9,6 +9,14 @@ public class DataManager : Singleton<DataManager>
     private string courseDataDirectory;
     private string assignmentDataDirectory;
 
+
+    void Awake()
+    {
+        // ADDME: listeners for saving and loading course and assignment data
+        EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(SaveNewCourse);
+        EvtSystem.EventDispatcher.AddListener<RemoveCourseTrigger>(DeleteCourseData);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +31,6 @@ public class DataManager : Singleton<DataManager>
         if (!Directory.Exists(assignmentDataDirectory)){
             Directory.CreateDirectory(assignmentDataDirectory);
         }
-
-        // ADDME: listeners for saving and loading course and assignment data
-        EvtSystem.EventDispatcher.AddListener<AddCourseTrigger>(SaveNewCourse);
-        EvtSystem.EventDispatcher.AddListener<RemoveCourseTrigger>(DeleteCourseData);
 
         // Load data on startup
         LoadCourseData();
@@ -71,24 +75,24 @@ public class DataManager : Singleton<DataManager>
     public void LoadCourseData()
     {
         List<CourseData> loadedData = new List<CourseData>();
-        FileInfo[] filenames;
 
         // get list of JSON filenames in CoourseDataDirectory
         DirectoryInfo source = new DirectoryInfo(courseDataDirectory);
-        filenames = source.GetFiles();
 
         // loop through file list
-        foreach (FileInfo file in filenames){
+        foreach (FileInfo file in source.GetFiles()){
             // read JSON files
             StreamReader reader = new StreamReader(file.FullName);
             string json = reader.ReadToEnd();
             // load each JSON data into program as CourseData object
             CourseData existing = JsonUtility.FromJson<CourseData>(json);
             loadedData.Add(existing);
+            // close file
+            reader.Close();
         }
 
         // FIXME: send list of CourseData objects
-        EvtSystem.EventDispatcher.Raise<LoadDataTrigger>(new LoadDataTrigger {
+        EvtSystem.EventDispatcher.Raise<LoadDataTrigger>(new LoadDataTrigger{
             data = loadedData
         });
         return;
